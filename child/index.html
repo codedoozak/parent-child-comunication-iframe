@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Child</title>
+</head>
+<body>
+  <h1>Child (Port 4000 - Iframe)</h1>
+  <div id="messageBox" style="margin-top: 20px; padding: 10px; background: #eee;"></div>
+
+  <script>
+    window.addEventListener('message', (event) => {
+      // IMPORTANT: Verify the origin to prevent security issues
+      if (event.origin !== 'http://localhost:3000') return;
+
+      if (event.data?.type === 'FROM_PARENT') {
+        const messageBox = document.getElementById('messageBox');
+        messageBox.innerText = `Received: ${event.data.payload}`;
+        console.log('Received from parent:', event.data.payload);
+      }
+    });
+  </script>
+</body>
+</html>

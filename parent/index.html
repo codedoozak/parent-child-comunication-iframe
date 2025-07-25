@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Parent</title>
+</head>
+<body>
+  <h1>Parent (Port 3000)</h1>
+  <button id="sendMessage">Send Message to Iframe</button>
+
+  <iframe
+    id="myIframe"
+    src="http://localhost:4000/index.html"
+    width="600"
+    height="300"
+    style="border:1px solid black"
+  ></iframe>
+
+  <script>
+    const iframe = document.getElementById('myIframe');
+
+    document.getElementById('sendMessage').addEventListener('click', () => {
+      const message = {
+        type: 'FROM_PARENT',
+        payload: '👋 Hello from parent at port 3000!'
+      };
+
+      // Send message to iframe
+      iframe.contentWindow.postMessage(message, '*');
+    });
+  </script>
+</body>
+</html>
